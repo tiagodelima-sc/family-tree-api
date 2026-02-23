@@ -1,3 +1,9 @@
 spring:
-  application:
-    name: family-tree
+  neo4j:
+    uri: ${NEO4J_URI:bolt://localhost:7687}
+    authentication:
+      username: ${NEO4J_USERNAME:neo4j}
+      password: ${NEO4J_PASSWORD:password}
+
+server:
+  port: ${PORT:8080}
