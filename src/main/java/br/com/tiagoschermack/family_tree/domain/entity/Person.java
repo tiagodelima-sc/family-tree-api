@@ -26,6 +26,8 @@ public class Person {
 
     private Gender gender;
 
+    private boolean deleted;
+
     @Relationship(type = "BELONGS_TO", direction = OUTGOING)
     private FamilyTree familyTree;
 
@@ -64,6 +66,10 @@ public class Person {
         return gender;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
     public FamilyTree getFamilyTree() {
         return familyTree;
     }
@@ -90,6 +96,10 @@ public class Person {
 
     public void setGender(Gender gender) {
         this.gender = gender;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public void setFamilyTree(FamilyTree familyTree) {

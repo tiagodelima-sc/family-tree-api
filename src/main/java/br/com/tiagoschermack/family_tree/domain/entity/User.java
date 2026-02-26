@@ -23,6 +23,8 @@ public class User {
     private String email;
     private String password;
 
+    private boolean deleted;
+
     @Relationship(type = "HAS_ACCESS", direction = OUTGOING)
     @SuppressWarnings("FieldMayBeFinal")
     private List<TreeAccess> trees = new ArrayList<>();
@@ -51,6 +53,10 @@ public class User {
         return password;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
     public List<TreeAccess> getTrees() {
         return trees;
     }
@@ -65,6 +71,10 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public void addTree(TreeAccess treeAccess) {

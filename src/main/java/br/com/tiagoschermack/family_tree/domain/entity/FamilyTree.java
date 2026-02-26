@@ -19,6 +19,8 @@ public class FamilyTree {
     @Property("is_public")
     private boolean isPublic;
 
+    private boolean deleted;
+
     protected FamilyTree() {}
 
     public FamilyTree(String name, String description, boolean isPublic) {
@@ -43,6 +45,10 @@ public class FamilyTree {
         return isPublic;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -53,5 +59,9 @@ public class FamilyTree {
 
     public void setPublic(boolean aPublic) {
         isPublic = aPublic;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

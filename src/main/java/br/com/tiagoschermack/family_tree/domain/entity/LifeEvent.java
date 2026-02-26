@@ -22,6 +22,8 @@ public class LifeEvent {
     private String place;
     private String description;
 
+    private boolean deleted;
+
     protected LifeEvent() {}
 
     public LifeEvent(LifeEventType type, LocalDate date, String place, String description) {
@@ -51,6 +53,10 @@ public class LifeEvent {
         return description;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
     public void setType(LifeEventType type) {
         this.type = type;
     }
@@ -65,5 +71,9 @@ public class LifeEvent {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
