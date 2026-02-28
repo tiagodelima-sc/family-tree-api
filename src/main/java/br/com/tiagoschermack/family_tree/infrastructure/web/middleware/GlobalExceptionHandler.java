@@ -22,6 +22,7 @@ public class GlobalExceptionHandler {
                 .body  (new ErrorResponse(exception.getMessage(), request.getRequestURI(), null));
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException exception, HttpServletRequest request) {
         List<FieldErrorResponse> errorResponses = exception.getBindingResult()
                 .getFieldErrors()
