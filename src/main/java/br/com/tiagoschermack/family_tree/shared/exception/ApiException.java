@@ -1,4 +1,4 @@
-package br.com.tiagoschermack.family_tree.shared;
+package br.com.tiagoschermack.family_tree.shared.exception;
 
 import org.springframework.http.HttpStatus;
 
