@@ -9,11 +9,14 @@ import java.util.Optional;
 
 public interface FamilyTreeNeo4jRepository extends Neo4jRepository<FamilyTree, String> {
 
-    Optional<FamilyTree> findByIdAndDeletedFalse(String id);
+    @Query("""
+            MATCH (u:User {id: $userId})-[:HAS_ACCESS]->(f:FamilyTree {id: $treeId})
+            WHERE f.deleted = false
+            RETURN f
+            """)
+    Optional<FamilyTree> findByIdAndUserId(String id, String userId);
 
     @Query("MATCH (u:User {id: $userId})-[:HAS_ACCESS]->(f:FamilyTree) WHERE f.deleted = false RETURN f")
     List<FamilyTree> findAllByUserId(String userId);
 
-    @Query("MATCH (f:FamilyTree {id: $id}) SET f.deleted = true")
-    void deleteById(String id);
 }

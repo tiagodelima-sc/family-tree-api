@@ -12,7 +12,4 @@ public interface UserNeo4jRepository extends Neo4jRepository<User, String> {
     Optional<User> findByEmailAndDeletedFalse(String email);
 
     boolean existsByEmailAndDeletedFalse(String email);
-
-    @Query("MATCH (u:User {id: $id}) SET u.deleted = true")
-    void deleteById(String id);
 }

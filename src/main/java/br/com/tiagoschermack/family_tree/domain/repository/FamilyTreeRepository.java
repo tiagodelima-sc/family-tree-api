@@ -9,9 +9,7 @@ public interface FamilyTreeRepository {
 
     FamilyTree save(FamilyTree familyTree);
 
-    Optional<FamilyTree> findById(String id);
+    Optional<FamilyTree> findByIdAndUserId(String id, String userId);
 
     List<FamilyTree> findAllByUserId(String userId);
-
-    void deleteById(String id);
 }

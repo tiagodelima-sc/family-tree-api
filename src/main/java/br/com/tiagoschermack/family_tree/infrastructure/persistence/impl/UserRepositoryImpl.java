@@ -35,9 +35,4 @@ public class UserRepositoryImpl implements UserRepository {
     public boolean existsByEmail(String email) {
         return neo4jRepository.existsByEmailAndDeletedFalse(email);
     }
-
-    @Override
-    public void deleteById(String id) {
-        neo4jRepository.deleteById(id);
-    }
 }

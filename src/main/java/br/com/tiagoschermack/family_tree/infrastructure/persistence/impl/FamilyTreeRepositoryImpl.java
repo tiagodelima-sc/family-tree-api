@@ -23,17 +23,12 @@ public class FamilyTreeRepositoryImpl implements FamilyTreeRepository {
     }
 
     @Override
-    public Optional<FamilyTree> findById(String id) {
-        return neo4jRepository.findByIdAndDeletedFalse(id);
+    public Optional<FamilyTree> findByIdAndUserId(String id, String userId) {
+        return neo4jRepository.findByIdAndUserId(id, userId);
     }
 
     @Override
     public List<FamilyTree> findAllByUserId(String userId) {
         return neo4jRepository.findAllByUserId(userId);
-    }
-
-    @Override
-    public void deleteById(String id) {
-        neo4jRepository.deleteById(id);
     }
 }
