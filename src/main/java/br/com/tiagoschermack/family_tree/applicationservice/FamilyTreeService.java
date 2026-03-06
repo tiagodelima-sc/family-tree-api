@@ -39,7 +39,7 @@ public class FamilyTreeService {
     }
 
     public FamilyTreeResponse getTree(String treeId, String userId) {
-        return FamilyTreeResponse.of(findTreeById(treeId, userId));
+        return FamilyTreeResponse.of(findTreeByIdAndUserId(treeId, userId));
     }
 
     public List<FamilyTreeResponse> getTrees(String userId) {
@@ -50,7 +50,7 @@ public class FamilyTreeService {
     }
 
     public FamilyTreeResponse updateTree(String treeId, String userId, UpdateFamilyTreeRequest treeRequest) {
-        FamilyTree existingTree = findTreeById(treeId, userId);
+        FamilyTree existingTree = findTreeByIdAndUserId(treeId, userId);
 
         if (treeRequest.name() != null)
             existingTree.setName(treeRequest.name());
@@ -66,13 +66,13 @@ public class FamilyTreeService {
     }
 
     public void deleteTree(String treeId, String userId) {
-        FamilyTree existingTree = findTreeById(treeId, userId);
+        FamilyTree existingTree = findTreeByIdAndUserId(treeId, userId);
         existingTree.setDeleted(true);
 
         familyTreeRepository.save(existingTree);
     }
 
-    private FamilyTree findTreeById(String treeId, String userId) {
+    private FamilyTree findTreeByIdAndUserId(String treeId, String userId) {
         return familyTreeRepository.findByIdAndUserId(treeId, userId)
                 .orElseThrow(() -> new NotFoundException("Árvore genealógica não encontrada"));
     }
