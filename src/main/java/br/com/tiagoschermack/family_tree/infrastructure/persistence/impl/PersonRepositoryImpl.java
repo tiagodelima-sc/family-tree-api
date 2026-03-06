@@ -28,8 +28,13 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
 
     @Override
-    public List<Person> findAllByTreeId(String treeId) {
-        return neo4jRepository.findAllByTreeId(treeId);
+    public Optional<Person> findByIdAndTreeId(String personId, String treeId) {
+        return neo4jRepository.findByIdAndTreeId(personId, treeId);
+    }
+
+    @Override
+    public List<Person> findAllByTreeIdAndUserId(String treeId, String userId) {
+        return neo4jRepository.findAllByTreeIdAndUserId(treeId, userId);
     }
 
     @Override

@@ -11,7 +11,9 @@ public interface PersonRepository {
 
     Optional<Person> findById(String id);
 
-    List<Person> findAllByTreeId(String treeId);
+    Optional<Person> findByIdAndTreeId(String personId, String treeId);
+
+    List<Person> findAllByTreeIdAndUserId(String treeId, String userId);
 
     void deleteById(String id);
 }
