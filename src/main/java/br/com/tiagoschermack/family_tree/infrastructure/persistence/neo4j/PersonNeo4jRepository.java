@@ -26,6 +26,11 @@ public interface PersonNeo4jRepository extends Neo4jRepository<Person, String> {
         """)
     List<Person> findAllByTreeIdAndUserId(String treeId, String userId);
 
-    @Query("MATCH (p:Person {id: $id}) SET p.deleted = true")
-    void deleteById(String id);
+    @Query("""
+        MATCH (p:Person)-[:PARTICIPATED_IN]->(e:LifeEvent {id: $eventId})
+        MATCH (p)-[:BELONGS_TO]->(f:FamilyTree {id: $treeId})
+        WHERE p.deleted = false
+        RETURN p
+        """)
+    List<Person> findAllByEventIdAndTreeId(String eventId, String treeId);
 }

@@ -30,11 +30,11 @@ public class PersonService {
     public PersonDetailResponse createPerson(String treeId, String userId, CreatePersonRequest personRequest) {
         Person personSaved = personRepository.save(new Person(personRequest.firstName(), personRequest.lastName(), personRequest.gender(), findTreeByIdAndUserId(treeId, userId)));
 
-        return toDetailResponse(personSaved);
+        return mapPersonDetailResponse(personSaved);
     }
 
     public PersonDetailResponse getPerson(String treeId, String personId) {
-        return toDetailResponse(findPersonByIdAndTreeId(personId, treeId));
+        return mapPersonDetailResponse(findPersonByIdAndTreeId(personId, treeId));
     }
 
     public List<PersonSummaryResponse> getPersons(String treeId, String userId) {
@@ -47,11 +47,17 @@ public class PersonService {
     public PersonDetailResponse updatePerson(String treeId, String personId, UpdatePersonRequest personRequest) {
         Person person = findPersonByIdAndTreeId(personId, treeId);
 
-        if (personRequest.firstName() != null) person.setFirstName(personRequest.firstName());
-        if (personRequest.lastName () != null) person.setLastName (personRequest.lastName ());
-        if (personRequest.gender   () != null) person.setGender   (personRequest.gender   ());
+        if (personRequest.firstName() != null)
+            person.setFirstName(personRequest.firstName());
 
-        return toDetailResponse(personRepository.save(person));
+        if (personRequest.lastName () != null)
+            person.setLastName(personRequest.lastName());
+
+        if (personRequest.gender() != null)
+            person.setGender(personRequest.gender());
+
+        Person personSaved = personRepository.save(person);
+        return mapPersonDetailResponse(personSaved);
     }
 
     public void deletePerson(String treeId, String personId) {
@@ -61,12 +67,12 @@ public class PersonService {
         personRepository.save(person);
     }
 
-    private PersonDetailResponse toDetailResponse(Person person) {
+    private PersonDetailResponse mapPersonDetailResponse(Person person) {
         return PersonDetailResponse.of(
                 person,
                 mapActivePersons(person.getParents()),
                 mapActivePersons(person.getChildren()),
-                mapEvents       (person)
+                mapLifeEvents       (person)
         );
     }
 
@@ -77,15 +83,15 @@ public class PersonService {
                 .toList();
     }
 
-    private List<LifeEventResponse> mapEvents(Person person) {
+    private List<LifeEventResponse> mapLifeEvents(Person person) {
         return person.getLifeEvents()
                 .stream()
                 .filter(ep -> !ep.getEvent().isDeleted())
-                .map   (ep -> toLifeEventResponse(person, ep))
+                .map   (ep -> mapLifeEventResponse(person, ep))
                 .toList();
     }
 
-    private LifeEventResponse toLifeEventResponse(Person person, EventParticipation participation) {
+    private LifeEventResponse mapLifeEventResponse(Person person, EventParticipation participation) {
         List<EventParticipationResponse> participants = List.of(
                 new EventParticipationResponse(
                         person.getId         (),
@@ -103,7 +109,7 @@ public class PersonService {
     }
 
     private FamilyTree findTreeByIdAndUserId(String treeId, String userId) {
-        return familyTreeRepository.findByIdAndUserId(treeId, userId)
+        return familyTreeRepository.findByTreeIdAndUserId(treeId, userId)
                 .orElseThrow(() -> new NotFoundException("Árvore genealógica não encontrada"));
     }
 }

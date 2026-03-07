@@ -38,7 +38,7 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
 
     @Override
-    public void deleteById(String id) {
-        neo4jRepository.deleteById(id);
+    public List<Person> findAllByEventIdAndTreeId(String eventId, String treeId) {
+        return neo4jRepository.findAllByEventIdAndTreeId(eventId, treeId);
     }
 }

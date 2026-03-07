@@ -15,5 +15,5 @@ public interface PersonRepository {
 
     List<Person> findAllByTreeIdAndUserId(String treeId, String userId);
 
-    void deleteById(String id);
+    List<Person> findAllByEventIdAndTreeId(String eventId, String treeId);
 }
