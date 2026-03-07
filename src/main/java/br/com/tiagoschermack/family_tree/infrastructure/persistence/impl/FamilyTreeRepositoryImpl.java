@@ -23,8 +23,8 @@ public class FamilyTreeRepositoryImpl implements FamilyTreeRepository {
     }
 
     @Override
-    public Optional<FamilyTree> findByIdAndUserId(String id, String userId) {
-        return neo4jRepository.findByIdAndUserId(id, userId);
+    public Optional<FamilyTree> findByTreeIdAndUserId(String treeId, String userId) {
+        return neo4jRepository.findByTreeIdAndUserId(treeId, userId);
     }
 
     @Override

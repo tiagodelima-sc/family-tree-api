@@ -73,7 +73,7 @@ public class FamilyTreeService {
     }
 
     private FamilyTree findTreeByIdAndUserId(String treeId, String userId) {
-        return familyTreeRepository.findByIdAndUserId(treeId, userId)
+        return familyTreeRepository.findByTreeIdAndUserId(treeId, userId)
                 .orElseThrow(() -> new NotFoundException("Árvore genealógica não encontrada"));
     }
 }

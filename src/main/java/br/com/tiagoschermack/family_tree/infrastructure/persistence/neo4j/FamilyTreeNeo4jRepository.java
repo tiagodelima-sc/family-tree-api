@@ -14,7 +14,7 @@ public interface FamilyTreeNeo4jRepository extends Neo4jRepository<FamilyTree, S
             WHERE f.deleted = false
             RETURN f
             """)
-    Optional<FamilyTree> findByIdAndUserId(String id, String userId);
+    Optional<FamilyTree> findByTreeIdAndUserId(String treeId, String userId);
 
     @Query("MATCH (u:User {id: $userId})-[:HAS_ACCESS]->(f:FamilyTree) WHERE f.deleted = false RETURN f")
     List<FamilyTree> findAllByUserId(String userId);
