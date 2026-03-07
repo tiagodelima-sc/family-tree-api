@@ -12,6 +12,4 @@ public interface LifeEventRepository {
     Optional<LifeEvent> findById(String id);
 
     List<LifeEvent> findAllByPersonId(String personId);
-
-    void deleteById(String id);
 }

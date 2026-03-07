@@ -13,7 +13,4 @@ public interface LifeEventNeo4jRepository extends Neo4jRepository<LifeEvent, Str
 
     @Query("MATCH (p:Person {id: $personId})-[:PARTICIPATED_IN]->(l:LifeEvent) WHERE l.deleted = false RETURN l")
     List<LifeEvent> findAllByPersonId(String personId);
-
-    @Query("MATCH (l:LifeEvent {id: $id}) SET l.deleted = true")
-    void deleteById(String id);
 }

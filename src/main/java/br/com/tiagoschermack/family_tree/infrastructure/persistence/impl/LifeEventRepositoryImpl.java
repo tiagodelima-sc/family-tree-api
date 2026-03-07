@@ -31,9 +31,4 @@ public class LifeEventRepositoryImpl implements LifeEventRepository {
     public List<LifeEvent> findAllByPersonId(String personId) {
         return neo4jRepository.findAllByPersonId(personId);
     }
-
-    @Override
-    public void deleteById(String id) {
-        neo4jRepository.deleteById(id);
-    }
 }
