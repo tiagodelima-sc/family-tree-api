@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static br.com.tiagoschermack.family_tree.shared.constants.RestConstants.PATH_AUTH;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -26,8 +27,8 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(STATELESS)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(POST, "/auth/register").permitAll()
-                        .requestMatchers(POST, "/auth/login").permitAll()
+                        .requestMatchers(POST,  PATH_AUTH + "/register"     ).permitAll()
+                        .requestMatchers(POST,  PATH_AUTH + "/login"        ).permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .anyRequest     ().authenticated()
                 )
